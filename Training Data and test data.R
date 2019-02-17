@@ -107,3 +107,17 @@ testing
 table(training$am)
 
 table(testing$am)
+women
+sample(x=1:nrow(women), size=0.7*nrow(women), replace=F)
+index=sample(x=1:nrow(women), size=0.7*nrow(women), replace=F)
+index
+trainData= women[index, ]
+testData= women[-index, ]
+nrow(trainData)
+nrow(testData)
+women[index, ]
+fit1= lm(weight~height, data=trainData)
+summary(fit1)
+p4= predict(fit1, newdata = testData, type= 'response')
+p4
+cbind(p4,testData$weight)
