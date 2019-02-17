@@ -16,7 +16,7 @@ price = c(59,59,59,59,59,59,59,59,59,59,59,59, 79,79,79,79,79,79,79,79,79, 79,79
 
 promotion= c(200,200,200,200,400,400,400,400, 600,600,600,600,200,200,200,200, 400,400,400,400,600,600,600,600, 200,200,200,200,400,400,400,400,600,600)
 
-#Create a DF from 3 variables
+#Create a data frame from 3 variables
 
 omni1 = data.frame(sales,price,promotion)
 
@@ -57,31 +57,21 @@ dim(omni)
 # we want to see how Sales Qty depend on Price and Promotion Values
 
 fit2 = lm(sales ~ price + promotion, data=omni)
-
-
-
 # summary statistics of model IMP STEP
-
 summary(fit2)
-
 #understand values : R2, AdjR2, Fstats pvalue, Coeff, ***, Residuals
 
 #F Stats pvalue = 2.86e-10 < 0.05 : Model Exists
 
-#At least 1 IV can be used to predict sales
+#At least 1 Independent Variables can be used to predict sales
 
 names(summary(fit2))
 
 summary(fit2)$adj.r.squared  # Adjt R2 here > .6 
 
 #>74% of variation in sales is explained by price and promotion
-
-
-
 #coefficients b1, b2
-
 coef(fit2)
-
 summary(fit2)
 
 #price  : -53 , pvalue = 9.2e-09 < 0.05 *** : Significant
@@ -90,7 +80,7 @@ summary(fit2)
 
 #promotion  : +3.6 , pvalue = 9.82e-06 < 0.05 ***: Significant
 
-#keeping price constant, if promotion is increased by 1 unit, salesqty increases by 53 units
+#keeping price constant, if promotion is increased by 1 unit, salesqty increases by  3.6131 units
 
 
 
@@ -109,7 +99,6 @@ summary(fit2)
 
 
 #create a dataframe of new sample values
-
 range(omni$price) ; range(omni$promotion)
 
 (ndata2 = data.frame(price=c(60,70), promotion=c(300,400)))
