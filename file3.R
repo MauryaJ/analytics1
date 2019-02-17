@@ -200,20 +200,52 @@ head(students3)
 str(students)
 head(students)
 students[students$marks1>60 , ]
+#above shows the students who have scored greater than 60 
 students[students$gender== 'F' | students$college == 'SRCC' , ]
+#above shows the all the females from SRCC '|' is OR function
+students[students$gender== 'F' & students$college == 'SRCC' , ]
 # | is a pipeline function
 # == sign to check equality
 students[students$gender=='M' & students$marks1<50, ]
 
 #highest from all college 
-students %>% filter(gender=='M' & marks1>60)
 library(dplyr)
 students %>% filter(gender=='M' & marks1>60)
+# %>% is a pipe filter
+#the above command filters data by gender 'M' who scored greater than 60
 students %>% filter(gender=='F' & marks1>60)
 students %>% group_by(gender) %>% summarise(mean(marks1),mean(marks2))
 # to get mean of marks by gender
 # %>% is filtering function
 students %>% group_by(college) %>% summarise(max(marks1),max(marks2))
+students %>% group_by(rollno) %>% summarise(max(marks1),max(marks2))
 students %>% filter(college=='FMS') %>% select(marks1, marks2)
 students %>% filter(college=='FMS') %>% select(sname,marks1, marks2)
 students %>% filter(college=='FMS') %>% select(sname, rollno,marks1, marks2)
+students
+students %>% group_by(college, gender) %>% summarise(countTotal=n())
+#to find out number of students in every college
+#What is the percentage of FMS students in the list of top 10 students?
+students %>% tally()
+#to find out the total no. of students
+students %>% group_by(college, gender) %>% summarise(countTotal=n(), mean(marks1), max(marks2))
+library(e1071)
+TotalMarks= marks1+marks2
+TotalMarks
+students %>% mutate(TotalMarks)
+# Mutate is used to add another column
+students %>% mutate(TotalMarks) %>% arrange(-TotalMarks)
+#put '-' before vector to arrange in decreasing order
+students %>% arrange(-marks1)
+students %>% arrange(-marks2)
+students %>% mutate(TotalMarks) %>% arrange(-TotalMarks) %>% head(n=5)
+# getting top 5 students data
+students %>% slice(1:5)
+# to get data for first five students
+students %>% slice(seq(1,30,2))
+# the above prints every alternate row
+students %>% sample_n(5)
+# above shows random 5 rows
+students %>% sample_frac(0.2)
+students %>% mutate(TotalMarks) %>% filter(TotalMarks== max(TotalMarks))
+
