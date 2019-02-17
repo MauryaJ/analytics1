@@ -89,8 +89,10 @@ url_gsheet = "https://docs.google.com/spreadsheets/d/1QogGSuEab5SZyZIw1Q8h-0yrBN
 df_gsheet = as.data.frame(gsheet2tbl(url_gsheet))
 
 head(df_gsheet)
-
-
+#my sheet
+url2="https://docs.google.com/spreadsheets/d/1NDD5KaV88jOf4nymvWmMLTJknoJ-tkuPhbjG_SF8E8E/edit#gid=0"
+newdata=as.data.frame(gsheet2tbl(url2))
+head(newdata)
 
 #Excel----
 

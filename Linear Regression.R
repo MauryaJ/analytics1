@@ -35,3 +35,9 @@ residuals(fit1)
 summary(residuals(fit1))
 summary(fit1)
 # summary of model
+newdata1=data.frame(height=c(60.4,55.9))
+# the values for which the weight is to be predicted is shown
+p1=predict(fit1, newdata=newdata1, type='response')
+p1
+cbind( newdata1, p1)
+# cbind combines data
