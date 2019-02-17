@@ -82,8 +82,6 @@ summary(fit2)
 
 #keeping price constant, if promotion is increased by 1 unit, salesqty increases by  3.6131 units
 
-
-
 fitted(fit2)
 
 omni$sales
@@ -101,9 +99,9 @@ summary(fit2)
 #create a dataframe of new sample values
 range(omni$price) ; range(omni$promotion)
 
-(ndata2 = data.frame(price=c(60,70), promotion=c(300,400)))
-
+(ndata2 = data.frame(price=c(60,70,72), promotion=c(300,400,350)))
 p2sales = predict(fit2, newdata=ndata2)
+p2sales
 
 cbind(ndata2, p2sales)
 
@@ -112,6 +110,7 @@ cbind(ndata2, p2sales)
 #Assumptions
 
 par(mfrow=c(2,2))
+# mfrow is to draw multiples frames , par to to draw plot
 
 plot(fit2)
 
@@ -119,7 +118,9 @@ par(mfrow=c(1,1))
 
 
 
-plot(fit2,which=1)  # no pattern, equal variance
+plot(fit2,which=1)
+# which=1 shows plot number 1
+# no pattern, equal variance
 
 plot(fit2,2)  # Residuals are normally distributed
 
@@ -132,14 +133,11 @@ omni[c(11,14,15),]
 
 
 fit3 = lm(sales ~ price + promotion, data=omni[-c(11,14,15),])
+# -c is there to remove the values you don't want in your graph
 
 plot(fit3,4)
 
 summary(fit3)
-
-
-
-#End of Multiple Linear Regression
 
 
 
@@ -178,3 +176,12 @@ cbind(omni, predict(fit2, newdata = data.frame(omni$price, omni$promotion)))
 cbind(omni, fitted(fit2))
 
 cbind(omni, fitted(fit2), omni$sales - fitted(fit2), residuals(fit2)
+      
+#End of Multiple Linear Regression
+      
+#divide data set into parts
+# training set= 70%
+# test set=30%
+nrow(women)    
+library(dplyr)
+women %>% sample_frac(0.7)-> train1
